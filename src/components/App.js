@@ -11,8 +11,8 @@ function App() {
 			<Navbar />
 			<main className="App">
 				<Switch>
-					<Route path="/" exact component={MoviesContainer} /> 
-					<Route path="/movie/:id" component={MovieDetails} />
+					<Route path="/movies-react-app" exact component={MoviesContainer} /> 
+					<Route path="/movies-react-app/movie/:id" component={MovieDetails} />
 				</Switch>
 			</main>
 			<Footer />

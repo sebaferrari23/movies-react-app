@@ -18,12 +18,7 @@ const MoviesContainer = ( {  popularMovies } ) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const loadMovies = () => {
-            dispatch(fetchPopularMovies());
-        };
-
-        loadMovies();
-
+        dispatch(fetchPopularMovies());
     }, [dispatch]);
 
     var movieList = popularMovies && popularMovies.map((movie, index) => {

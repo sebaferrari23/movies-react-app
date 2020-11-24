@@ -46,7 +46,6 @@ export const fetchPopularMovies = () => async dispatch => {
 export const fetchSearchMovies = query => async dispatch => {
     if(query) {
         try{
-            console.log('query from fecth: '+query);
             const {data} = await axios.get(searchMoviesUrl, {
                 params: {
                     api_key: APIKey,

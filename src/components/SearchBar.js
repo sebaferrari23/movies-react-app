@@ -1,9 +1,7 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { useSelector, useDispatch } from "react-redux"
 import {
   searchMovies,
-  loadingMovies,
   fetchSearchMovies
 } from '../actions/moviesActions'
 import styled from 'styled-components'

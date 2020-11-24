@@ -64,7 +64,7 @@ const MovieCard = styled.article`
 const Movie = ({ title, poster, year, id }) => {
     return (
         <MovieCard>
-            <Link to={`/movie/${id}`}>
+            <Link to={`movies-react-app/movie/${id}`}>
                 { poster ? <img src={poster} alt={title} /> : '' }
                 <div className="movie__content">
                     <h3>{title}</h3>
