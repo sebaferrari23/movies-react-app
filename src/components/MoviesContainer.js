@@ -14,10 +14,11 @@ const MovieContainerStyled = styled.section`
 
 const MoviesContainer = ( { searchMovies, query } ) => {
 
+    var label = '';
     if(query && searchMovies) {
-        var label = `Search results for: ${query}`
+        label = `Search results for: ${query}`
     } else {
-        var label = 'Most populars movies'
+        label = 'Most populars movies'
     }
 
     return (

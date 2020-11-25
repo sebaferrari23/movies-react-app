@@ -103,7 +103,7 @@ const MovieDetails = ( { movie, match } ) => {
         <Background image={`https://image.tmdb.org/t/p/w300${movie.backdrop_path}`}>
             <div className="container">
 
-                <Link className="go-back" to="/movies-react-app"><i className="fas fa-chevron-left"></i><strong>Go back</strong></Link>
+                <Link className="go-back" to="/"><i className="fas fa-chevron-left"></i><strong>Go back</strong></Link>
 
                 <MovieDetailsContent>
                     { movie.poster_path ? <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} /> : '' }

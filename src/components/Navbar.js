@@ -55,7 +55,7 @@ const Navbar = () => {
         <Header>
             <div className="container">
 
-                <Logo exact to="/movies-react-app">
+                <Logo exact to="/">
                     <img src={logo} alt="Movies React App" />
                     <strong>Movies React App</strong>
                 </Logo>
