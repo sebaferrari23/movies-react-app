@@ -2,12 +2,12 @@
 This project was made with React.js, Redux, Hooks, Axios and [The Movie Database API](https://developers.themoviedb.org/3).
 
 ## Screenshots
-![Movies React App](https://sebaferrari.com.ar/movies-react-app/screenshot.png)
+![Movies React App](https://sebaferrari.com.ar/movies-react-app/screenshot.jpg)
 
 ## TO-DO
-[ ] Responsive.
-[ ] In the detail of the movie show the results if the user performs a search.
-[ ] If the rating filter doesn't find results change the label.
+- [ ] Responsive.
+- [ ] In the detail of the movie show the results if the user performs a search.
+- [ ] If the rating filter doesn't find results change the label.
 
 ## Available Scripts
 In the project directory, you can run:
