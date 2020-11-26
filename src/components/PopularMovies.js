@@ -9,9 +9,11 @@ const Grid = styled.div`
     grid-gap: 40px;
 `
 
-const MoviesContainer = ( { popularMovies, loading } ) => {
+const MoviesContainer = ( { popularMovies, voteAverage } ) => {
 
-    const movieList = popularMovies.length > 0 && popularMovies.map((movie, index) => {
+    const movieList = popularMovies.length > 0 && popularMovies
+    .filter(movie => (movie.rating < voteAverage.max ) && (movie.rating > voteAverage.min) )
+    .map((movie, index) => {
         return (
             <Movie 
                 key={index}
@@ -29,12 +31,11 @@ const MoviesContainer = ( { popularMovies, loading } ) => {
             { movieList }
         </Grid>
     )
-    
 }
 
 const mapStateToProps = state => ({
+	voteAverage: state.movies.voteAverage,
     popularMovies: state.movies.popularMovies,
-    loading: state.movies.loading,
 });
 
 export default connect(mapStateToProps)(MoviesContainer);
