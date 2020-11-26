@@ -95,7 +95,6 @@ export const searchMovies = query => dispatch => {
 };
 
 export const ratingMovies = (min, max) => dispatch => {
-    console.log(min, max);
     dispatch({
         type: RATING_MOVIES,
         payload: {min, max}
