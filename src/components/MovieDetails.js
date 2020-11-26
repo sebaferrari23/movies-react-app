@@ -5,7 +5,6 @@ import { fetchMovie, setLoading } from '../actions/moviesActions'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Spinner from './Spinner'
-import StarRatings from 'react-star-ratings'
 
 const Background = styled.section`
     padding: 40px 0 90px 0;
@@ -53,10 +52,7 @@ const MovieDetailsContent = styled.div`
     }
     & h2 {
         font-size: 40px;
-        margin: 0 0 10px 0;
-    }
-    & .star-ratings {
-        margin-bottom: 15px;
+        margin-top: 0;
     }
     & p {
         font-size: 18px;
@@ -102,8 +98,6 @@ const MovieDetails = ( { movie, match, loading } ) => {
         )
     });
 
-    const movieAverage = Math.ceil(movie.vote_average/2);
-
     return (
         <Background image={`https://image.tmdb.org/t/p/w300${movie.backdrop_path}`}>
             
@@ -117,14 +111,6 @@ const MovieDetails = ( { movie, match, loading } ) => {
                         { movie.poster_path ? <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} /> : '' }
                         <div>
                             <h2>{ movie.title }</h2>
-                            <StarRatings 
-                                rating={movieAverage}
-                                starRatedColor="#ffd700"
-                                numberOfStars={5}
-                                name='rating'
-                                starDimension='20px'
-                                starSpacing='2px'
-                            />
                             <p>{ movie.overview }</p>
                             <GenresList>{genresList}</GenresList>
                         </div>
