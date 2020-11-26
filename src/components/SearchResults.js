@@ -9,16 +9,19 @@ const Grid = styled.div`
     grid-gap: 40px;
 `
 
-const SearchMovies = ( { searchMovies } ) => {
+const SearchResults = ( { searchResults, voteAverage } ) => {
 
-    const movieList = searchMovies && searchMovies.map((movie, index) => {
+    const movieList = searchResults.length > 0 && searchResults
+    .filter(movie => (movie.rating < voteAverage.max ) && (movie.rating > voteAverage.min) )
+    .map((movie, index) => {
         return (
             <Movie 
-                key={index}
+                key={movie.id}
                 id={movie.id} 
                 title={movie.title} 
                 poster={movie.poster}
                 year={movie.year}
+                rating={movie.rating}
             />
         )
     });
@@ -31,7 +34,8 @@ const SearchMovies = ( { searchMovies } ) => {
 }
 
 const mapStateToProps = state => ({
-    searchMovies: state.movies.searchMovies
+	voteAverage: state.movies.voteAverage,
+    searchResults: state.movies.searchResults,
 });
 
-export default connect(mapStateToProps)(SearchMovies);
+export default connect(mapStateToProps)(SearchResults);

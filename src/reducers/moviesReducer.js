@@ -1,5 +1,6 @@
 import {
     SEARCH_MOVIES,
+    RATING_MOVIES,
     FETCH_SEARCH_MOVIES,
     FETCH_POPULAR_MOVIES,
     FETCH_MOVIE,
@@ -8,7 +9,8 @@ import {
   
 const initialState = {
     query: '',
-    searchMovies: [],
+    voteAverage: {min: 0, max:10},
+    searchResults: [],
     popularMovies: [],
     loading: false,
     movie: []
@@ -22,10 +24,16 @@ const movies = (state = initialState, action) => {
                 query: action.payload,
                 loading: false
             };
+        case RATING_MOVIES:
+            return {
+                ...state,
+                voteAverage: action.payload,
+                loading: false
+            };
         case FETCH_SEARCH_MOVIES:
             return {
                 ...state,
-                searchMovies: action.payload,
+                searchResults: action.payload,
                 loading: false
             };
         case FETCH_POPULAR_MOVIES:

@@ -1,11 +1,7 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { useDispatch } from "react-redux"
-import styled from 'styled-components'
-import {
-  fetchPopularMovies,
-} from '../actions/moviesActions';
 import Movie from './Movie'
+import styled from 'styled-components'
 
 const Grid = styled.div`
     display: grid;
@@ -13,15 +9,9 @@ const Grid = styled.div`
     grid-gap: 40px;
 `
 
-const MoviesContainer = ( {  popularMovies } ) => {
+const MoviesContainer = ( { popularMovies, loading } ) => {
 
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(fetchPopularMovies());
-    }, [dispatch]);
-
-    var movieList = popularMovies && popularMovies.map((movie, index) => {
+    const movieList = popularMovies.length > 0 && popularMovies.map((movie, index) => {
         return (
             <Movie 
                 key={index}
@@ -29,6 +19,7 @@ const MoviesContainer = ( {  popularMovies } ) => {
                 title={movie.title} 
                 poster={movie.poster}
                 year={movie.year}
+                rating={movie.rating}
             />
         )
     });
@@ -42,7 +33,8 @@ const MoviesContainer = ( {  popularMovies } ) => {
 }
 
 const mapStateToProps = state => ({
-    popularMovies: state.movies.popularMovies
+    popularMovies: state.movies.popularMovies,
+    loading: state.movies.loading,
 });
 
 export default connect(mapStateToProps)(MoviesContainer);

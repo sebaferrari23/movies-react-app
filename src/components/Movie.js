@@ -1,6 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import StarRatings from 'react-star-ratings'
 
 const MovieCard = styled.article`
     & > a {
@@ -32,10 +33,16 @@ const MovieCard = styled.article`
         }
         & > .movie__content {
             position: absolute;
+            width: 100%;
             z-index: 10;
             text-align: center;
             color: #fff;
             padding: 30px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
             & > h3 {
                 font-size: 24px;
                 margin: 0 0 10px 0;
@@ -44,12 +51,16 @@ const MovieCard = styled.article`
                 margin: 0;
                 font-weight: 700;
             }
+            & > .star-ratings {
+                position: absolute !important;
+                bottom: 30px;
+            }
         }
         &:hover {
             & > img {
                 transform: scale(1.05);
                 filter: grayscale(80%) contrast(120%) blur(1px);
-                opacity: .5;
+                opacity: .3;
                 transition: all .4s ease-in-out;
             }
             & > .movie__content {
@@ -61,7 +72,7 @@ const MovieCard = styled.article`
     }
 `
 
-const Movie = ({ title, poster, year, id }) => {
+const Movie = ({ title, poster, year, id, rating }) => {
     return (
         <MovieCard>
             <Link to={`/movie/${id}`}>
@@ -69,10 +80,19 @@ const Movie = ({ title, poster, year, id }) => {
                 <div className="movie__content">
                     <h3>{title}</h3>
                     <p>{year}</p>
+
+                    <StarRatings 
+                        rating={Math.ceil(rating/2)}
+                        starRatedColor="#ffd700"
+                        numberOfStars={5}
+                        name='rating'
+                        starDimension='20px'
+                        starSpacing='2px'
+                    />
+
                 </div>
             </Link>
         </MovieCard>
     )
 }
-
-export default Movie
+export default Movie;

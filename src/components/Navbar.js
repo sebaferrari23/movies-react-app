@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../logo.svg';
 import SearchBar from './SearchBar';
+import RatingFilter from './RatingFilter';
 
 const Header = styled.header`
     height: 90px;
@@ -61,6 +62,8 @@ const Navbar = () => {
                 </Logo>
                 
                 <SearchBar />
+
+                <RatingFilter />
 
             </div>
         </Header>

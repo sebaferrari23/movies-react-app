@@ -1,17 +1,16 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { useDispatch } from "react-redux";
-import {
-  fetchMovie,
-} from '../actions/moviesActions';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { useDispatch } from "react-redux"
+import { fetchMovie, setLoading } from '../actions/moviesActions'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import Spinner from './Spinner'
+import StarRatings from 'react-star-ratings'
 
 const Background = styled.section`
     padding: 40px 0 90px 0;
     position: relative;
     overflow: hidden;
-    margin-top: 90px;
     min-height: calc(100vh - 180px);
     display: flex;
     align-items: center;
@@ -54,7 +53,10 @@ const MovieDetailsContent = styled.div`
     }
     & h2 {
         font-size: 40px;
-        margin-top: 0;
+        margin: 0 0 10px 0;
+    }
+    & .star-ratings {
+        margin-bottom: 15px;
     }
     & p {
         font-size: 18px;
@@ -84,14 +86,15 @@ const GenresList = styled.ul`
     }
 `
 
-const MovieDetails = ( { movie, match } ) => {
+const MovieDetails = ( { movie, match, loading } ) => {
 
     const dispatch = useDispatch();
+    const params = match.params;
 
     useEffect(() => {
-        let params = match.params;
         dispatch(fetchMovie(params.id));
-    }, [dispatch]);
+        dispatch(setLoading(true));
+    }, [dispatch, params]);
 
     const genresList = movie.genres && movie.genres.map((genre, index) => {
         return (
@@ -99,28 +102,43 @@ const MovieDetails = ( { movie, match } ) => {
         )
     });
 
+    const movieAverage = Math.ceil(movie.vote_average/2);
+
     return (
         <Background image={`https://image.tmdb.org/t/p/w300${movie.backdrop_path}`}>
-            <div className="container">
+            
+            { loading ? <Spinner /> :
 
-                <Link className="go-back" to="/"><i className="fas fa-chevron-left"></i><strong>Go back</strong></Link>
+                <div className="container">
 
-                <MovieDetailsContent>
-                    { movie.poster_path ? <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} /> : '' }
-                    <div>
-                        <h2>{ movie.title }</h2>
-                        <p>{ movie.overview }</p>
-                        <GenresList>{genresList}</GenresList>
-                    </div>
-                </MovieDetailsContent>
+                    <Link className="go-back" to="/"><i className="fas fa-chevron-left"></i><strong>Go back</strong></Link>
 
-            </div>
+                    <MovieDetailsContent>
+                        { movie.poster_path ? <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} /> : '' }
+                        <div>
+                            <h2>{ movie.title }</h2>
+                            <StarRatings 
+                                rating={movieAverage}
+                                starRatedColor="#ffd700"
+                                numberOfStars={5}
+                                name='rating'
+                                starDimension='20px'
+                                starSpacing='2px'
+                            />
+                            <p>{ movie.overview }</p>
+                            <GenresList>{genresList}</GenresList>
+                        </div>
+                    </MovieDetailsContent>
+
+                </div>
+            }
         </Background>
     )
 }
 
 const mapStateToProps = state => ({
-    movie: state.movies.movie
+    movie: state.movies.movie,
+    loading: state.movies.loading,
 });
 
-export default connect(mapStateToProps)(MovieDetails);
+export default connect(mapStateToProps, {fetchMovie, setLoading})(MovieDetails);
